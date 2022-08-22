@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>my page</title>
+</head>
+<body>
+
+<!-- 출처(express -> API참조 ->)
+  request body로 받는 방법 (req가 post임)
+  json으로 보낼때는 app.use(express.json())
+  form으로 보낼때는 app.use(express.urlencoded({ extended: true }))
+  상관없지만 그냥 둘 다 쓰면 됌-->
+
+  <h1>댓글 목록</h1>
+
+  <ul>
+    <% for (comment of comments) { %>
+      <li><%= comment.id %><%= comment.content %></li>
+      <form action="/update/<%= comment.id %>" method="post"> 
+        <input type="text" id="lname" name="content">
+        <input type="submit" value="수정하기">
+      </form>
+      <form action="/delete/<%= comment.id %>" method="post"> 
+        <input type="submit" value="삭제하기">
+      </form>
+    <% } %>
+  </ul>
+
+    <hr>
+
+  <form action="/create" method="post"> 
+    <input type="text" id="lname" name="content"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
